@@ -1,5 +1,7 @@
 import Rooms from "../models/Rooms.js";
 import Hotel from "../models/Hotel.js"
+
+
 export const createRoom = async(req, res, next)=>{
     const hotelId = req.params.hotelid;
     const newRoom = new Rooms(req.body);
@@ -27,6 +29,7 @@ export const updateRoom = async(req, res, next) =>{
         next(err)
     }
 }
+
 export const deleteRoom = async(req, res, next) =>{
     const hotelId = req.params.hotelid;
 
@@ -45,6 +48,7 @@ export const deleteRoom = async(req, res, next) =>{
         next(err)
     }
 }
+
 export const getRoom = async(req, res, next) =>{
     try {
         const room = await Hotel.findById(req.params.id);
@@ -53,6 +57,7 @@ export const getRoom = async(req, res, next) =>{
         next(err);
     }
 }
+
 export const getRooms = async(req, res, next) =>{
     try {
         const rooms = await Rooms.find();
