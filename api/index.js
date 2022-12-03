@@ -6,6 +6,7 @@ import hotelsRoute from './routes/hotels.js'
 import usersRoute from './routes/users.js'
 import roomsRoute from './routes/rooms.js'
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 const app = express();
 dotenv.config();
@@ -31,6 +32,7 @@ mongoose.connection.on("connected", ()=>{
 app.use(express.json())
 app.use(cookieParser());
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/auth', authRoute);
 app.use('/api/hotels', hotelsRoute);
 app.use('/api/users', usersRoute);
