@@ -7,6 +7,7 @@ import usersRoute from './routes/users.js'
 import roomsRoute from './routes/rooms.js'
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import cors from "cors"
 
 const app = express();
 dotenv.config();
@@ -31,6 +32,7 @@ mongoose.connection.on("connected", ()=>{
 
 app.use(express.json())
 app.use(cookieParser());
+app.use(cors());
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/auth', authRoute);
@@ -48,7 +50,7 @@ app.use((err, req, res, next)=>{
         stack : err.stack
     })
 })
-app.listen(3000, ()=>{
+app.listen(3001, ()=>{
     connect();
     console.log("connected to backend");
 });
