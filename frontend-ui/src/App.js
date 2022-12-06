@@ -14,6 +14,7 @@ import './styles/maillist.scss'
 import './styles/footer.scss'
 import './styles/list.scss'
 import './styles/hotel.scss'
+import './styles/login.scss'
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBed, faCalendarDays, faPerson} from '@fortawesome/free-solid-svg-icons'
 import {DateRange} from 'react-date-range'
@@ -6,18 +6,19 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from 'date-fns'
 import { useNavigate } from 'react-router-dom';
+import { SearchContext } from '../context/SearchContext';
 
 
 const Searchbar = () => {
     const navigate = useNavigate()
     const [opendatepicker, setopendatepicker] = useState(false)
     const [destination, setDestination] = useState("")
-    const [date, setDate] = useState([
-    {
-        startDate : new Date(),
-        endDate: new Date(),
-        key : 'selection'
-    }
+    const [dates, setDates] = useState([
+        {
+            startDate : new Date(),
+            endDate: new Date(),
+            key : 'selection'
+        }
     ]);
 
     const [openOptions, setOpenOptions] = useState(false);
@@ -26,9 +27,7 @@ const Searchbar = () => {
         childrens : 0,
         rooms : 1
     });
-    const handleSearch = () =>{
-        navigate("/hotels", {state:{destination, date, options}})
-    }
+    
     const handleOption = (name, operation) =>{
         setOptions((prev)=>{
             return {
@@ -36,11 +35,19 @@ const Searchbar = () => {
             }
         })
     }
+
+    const {dispatch} = useContext(SearchContext)
+    
+    const handleSearch = () =>{
+        dispatch({type:"NEW_SEARCH", payload:{destination, dates, options}});
+        navigate("/hotels", {state:{destination, dates, options}})
+    }
+
   return (
       <div className='headerSearchBar'>
         <div className='headerSearchItem'>
             <FontAwesomeIcon icon={faBed} className='headerIcon'/>
-            <input required type='text'
+            <input type='text'
                  placeholder='Where are you going?'
                  className='headerSearchInput'
                     onChange={e=>setDestination(e.target.value)}
@@ -48,13 +55,13 @@ const Searchbar = () => {
         </div>
         <div className='headerSearchItem'>
             <FontAwesomeIcon icon={faCalendarDays} className='headerIcon'/>
-            <span onClick={()=>setopendatepicker(!opendatepicker)} className='headerSearchText'>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+            <span onClick={()=>setopendatepicker(!opendatepicker)} className='headerSearchText'>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
             {opendatepicker &&
             <DateRange
                 editableDateInputs = {true}
-                onChange = {item => setDate([item.selection])}
+                onChange = {item => setDates([item.selection])}
                 moveRangeOnFirstSelection={false}
-                ranges={date}
+                ranges={dates}
                 className='date'
                 minDate={new Date()}
             />}
