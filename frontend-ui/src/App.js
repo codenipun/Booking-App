@@ -14,6 +14,7 @@ import './styles/maillist.scss'
 import './styles/footer.scss'
 import './styles/list.scss'
 import './styles/hotel.scss'
+import Login from './Components/Login';
 import './styles/login.scss'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/hotels' element={<List/>}/>
         <Route path='/hotels/:id' element={<Hotel/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );
