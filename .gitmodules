@@ -1,3 +1,0 @@
-[submodule "frontend"]
-	path = frontend
-	url = https://github.com/codenipun/booking-app-react-ui.git
