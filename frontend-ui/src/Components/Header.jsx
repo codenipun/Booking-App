@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBed, faPlane, faTaxi, faCar} from '@fortawesome/free-solid-svg-icons'
 import Searchbar from './Searchbar'
+import { AuthContext } from '../context/AuthContext'
 
 const Header = ({type}) => {
-    
+    const {user} = useContext(AuthContext);
   return (
+    
     <div className='header'>
         <div className={type==='list' ? 'headerContainer listMode' : "headerContainer"}>
             <div className='headerList'>
@@ -37,7 +39,7 @@ const Header = ({type}) => {
                 
                 <p className='headerDesc'>Get Rewarded fror your travels - unlock instant saving of 10% or more with a free lamabooking account</p>
                 
-                <button className='headerBtn'>Sign in / Register</button>
+                {!user && <button className='headerBtn'>Sign in / Register</button>}
             </>
         }
         </div>
