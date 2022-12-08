@@ -16,6 +16,7 @@ import './styles/list.scss'
 import './styles/hotel.scss'
 import Login from './Components/Login';
 import './styles/login.scss'
+import './styles/roomBookLayout.scss'
 
 function App() {
   return (

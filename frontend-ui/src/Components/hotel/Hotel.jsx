@@ -11,9 +11,12 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch"
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { parseWithOptions } from 'date-fns/fp'
+import { AuthContext } from '../../context/AuthContext'
+import RoomBookLayout from '../RoomBookLayout'
+
 
 const Hotel = () => {
   const photos = [
@@ -36,9 +39,10 @@ const Hotel = () => {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
   ];
-
+  const {user} = useContext(AuthContext);
   const [slideNumber, setSlideNumber] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // for slider
+  const [openBookLayout, setOpenBookLayout] = useState(false)  //openBookLayout===openModal
 
   const handleOpen = (i)=>{
     setSlideNumber(i);
@@ -74,7 +78,15 @@ const Hotel = () => {
     }
     setSlideNumber(newSlideNumber);
   }
-
+  const navigate = useNavigate();
+  
+  const handleBook = () =>{
+    if(user){
+      setOpenBookLayout(true);
+    }else{
+      navigate("/login");
+    }
+  }
   return (
     <div>
       <Navbar/>
@@ -92,7 +104,7 @@ const Hotel = () => {
           </div>
         }
           <div className='hotelWrapper'>
-            <button className='bookNow'>Reserve or Book Now!</button>
+            <button className='bookNow' onClick={handleBook}>Reserve or Book Now!</button>
             <h1 className='hotelTitle'>{data.name}</h1>
             <div className='hotelAddress'>
               <FontAwesomeIcon icon={faLocationDot}/>
@@ -120,13 +132,15 @@ const Hotel = () => {
                 <span>Located in the real heart of krakov, this property has an
                 excellent location score of 9.8!</span>
                 <h2><b>${days * data.cheapestPrice * options.rooms}</b>({days} nights)</h2>
-                <button>Reserve or Book Now!</button>
+                <button onClick={handleBook}>Reserve or Book Now!</button>
               </div>
             </div>
           </div>
           <MailList/>
           <Footer/>
         </div>}
+        {openBookLayout && <RoomBookLayout setOpen = {setOpenBookLayout} hotelid = {id}
+        />}
     </div>
   )
 }
