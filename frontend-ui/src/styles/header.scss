@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     position: relative;
+    font-family: 'Roboto';
 }
 
 .headerContainer{
@@ -25,19 +26,24 @@
 .headerListItem{
     display: flex;
     gap: 10px;
-    border: 1px solid white;
     padding: 10px;
     border-radius: 20px;
     
     cursor: pointer;
     
     &:hover{
-        background-color: rgb(0, 113, 195);
+        background-color: #004cb8;
     }
+}
+
+.stays{  
+    border: 1px solid white;
 }
 
 .headerDesc{
     margin: 20px 0px;
+    font-size: 25px;
+    font-weight:100;
 }
 
 .headerBtn{
@@ -136,4 +142,8 @@
 
 .optionCounterBtn:disabled{
     cursor: not-allowed;
+}
+
+.headerTitle{
+    font-size: 50px;
 }

@@ -6,11 +6,11 @@ const Navbar = () => {
   const {user} = useContext(AuthContext);
   return (
     <div className='navbar'>
-      <div>
+      <div >
         <Link to={"/"} style={{textDecoration:"none", color:"white"}}>
-          <span>
-              lamabooking
-          </span>
+          <div className='logo'>
+              booking.com
+          </div>
         </Link>
        {user ? user.username : ( <div className='navItems'>
             <button className='navButton'>Register</button>

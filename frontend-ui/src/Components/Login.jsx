@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 const Login = () => {
+    
     const [credential, setCredential] = useState({
         username : undefined,
         password : undefined
@@ -28,10 +31,14 @@ const Login = () => {
         }
     }
   return (
+    <><Navbar/>
     <div className='login'>
         <div className='lContainer'>
-            <input className='linput' placeholder='username' type={'text'} id='username' onChange={handleChange}></input>
-            <input className='linput' placeholder='password' type={'password'} id='password' onChange={handleChange}></input>
+            <h1>Sign in or create an account</h1>
+            <label className='lLabel'>Username</label>
+            <input className='linput' type={'text'} id='username' onChange={handleChange}></input>
+            <label className='lLabel'>Password</label>
+            <input className='linput' type={'password'} id='password' onChange={handleChange}></input>
             <button disabled={loading} className='lButton' onClick={handleClick}>Login</button>
             {
                 error && <div>
@@ -39,8 +46,9 @@ const Login = () => {
                 </div>
             }
         </div>
-      
     </div>
+    <Footer/>
+    </>
   )
 }
 

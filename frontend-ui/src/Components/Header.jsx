@@ -11,7 +11,7 @@ const Header = ({type}) => {
     <div className='header'>
         <div className={type==='list' ? 'headerContainer listMode' : "headerContainer"}>
             <div className='headerList'>
-                <div className='headerListItem'>
+                <div className='headerListItem stays'>
                     <FontAwesomeIcon icon={faBed} />
                     <span>Stays</span>
                 </div>
@@ -35,9 +35,9 @@ const Header = ({type}) => {
                 type!=="list" &&
            
                 <>
-                <h1 className='headerTitle'>A lifetime of discounts? It's Genius.</h1>
+                <h1 className='headerTitle'>Find your next stay</h1>
                 
-                <p className='headerDesc'>Get Rewarded fror your travels - unlock instant saving of 10% or more with a free lamabooking account</p>
+                <p className='headerDesc'>Search low prices on hotels, homes and much more...</p>
                 
                 {!user && <button className='headerBtn'>Sign in / Register</button>}
             </>
