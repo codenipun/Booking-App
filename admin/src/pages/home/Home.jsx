@@ -12,22 +12,20 @@ const Home = () => {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        {/* <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
-        </div> */}
-        <div>
-          Welcome to admin dashboard of booking.com
+        
+        <div className="homeitem">
+          <div className="headingTitle">
+          <span className="heading">
+           Welcome to 
+           </span>
+          <span className="heading">
+           Admin Dashboard 
+           </span>
+          <span className="heading">
+          Hotel Booking
+           </span>
+          </div>
+          <img className="homeing" src="https://img.freepik.com/premium-vector/hotel-booking-concept-flat-design-man-tourist-with-luggage-choosing-apartment-using-mobile-app-traveler-goes-vacation-reserving-hostel-room-vector-illustration-with-people-scene-web_198565-1811.jpg?w=1060" alt=""/>
         </div>
       </div>
     </div>

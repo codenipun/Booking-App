@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch"
 import axios from "axios";
+import Loader from "../loader/Loader";
 
 const Datatable = ({columns}) => {
   const location = useLocation()
@@ -57,7 +58,7 @@ const Datatable = ({columns}) => {
         </Link>
       </div>
       {
-        loading ? "Loading Please wait" : 
+        loading ? <Loader/> : 
         <DataGrid
         className="datagrid"
         rows={list}
