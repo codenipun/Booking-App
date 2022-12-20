@@ -7,8 +7,11 @@ const Navbar = () => {
   console.log(user);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
-  const handleAuth=()=>{
+  const handleLogin=()=>{
     navigate("/login")
+  }
+  const handleRegister=()=>{
+    navigate("/register")
   }
 
   const handleLogout = () =>{
@@ -29,8 +32,8 @@ const Navbar = () => {
        <img className='userimg' src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt=""/>
        
        </div> : ( <div className='navItems'>
-            <button className='navButton'>Register</button>
-            <button onClick={handleAuth} className='navButton'>Login</button>
+            <button onClick={handleRegister} className='navButton'>Register</button>
+            <button onClick={handleLogin} className='navButton'>Login</button>
         </div>)}
 
         {openMenu &&

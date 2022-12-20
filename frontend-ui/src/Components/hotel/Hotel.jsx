@@ -16,6 +16,7 @@ import { SearchContext } from '../../context/SearchContext'
 import { parseWithOptions } from 'date-fns/fp'
 import { AuthContext } from '../../context/AuthContext'
 import RoomBookLayout from '../RoomBookLayout'
+import Loader from '../Loader'
 
 
 const Hotel = () => {
@@ -91,7 +92,7 @@ const Hotel = () => {
     <div>
       <Navbar/>
       <Header type={'list'}/>
-        {loading? "Loading" : <div className='hotelContainer'>
+        {loading? <Loader/> : <div className='hotelContainer'>
         {
           open && <div className="slider">
             <FontAwesomeIcon icon={faCircleXmark} className='close' onClick={()=>setOpen(false)}

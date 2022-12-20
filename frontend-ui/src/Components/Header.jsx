@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBed, faPlane, faTaxi, faCar} from '@fortawesome/free-solid-svg-icons'
 import Searchbar from './Searchbar'
 import { AuthContext } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 const Header = ({type}) => {
     const {user} = useContext(AuthContext);
@@ -39,7 +40,7 @@ const Header = ({type}) => {
                 
                 <p className='headerDesc'>Search low prices on hotels, homes and much more...</p>
                 
-                {!user && <button className='headerBtn'>Sign in / Register</button>}
+                {!user && <Link to={"/login"}><button className='headerBtn'>Sign in / Register</button></Link>}
             </>
         }
         </div>

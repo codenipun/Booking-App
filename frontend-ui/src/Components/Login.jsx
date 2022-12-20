@@ -40,6 +40,7 @@ const Login = () => {
             <label className='lLabel'>Password</label>
             <input className='linput' type={'password'} id='password' onChange={handleChange}></input>
             <button disabled={loading} className='lButton' onClick={handleClick}>Login</button>
+            <span className='newUser'>New User? &nbsp; <a href='/register'> Sign Up</a></span>
             {
                 error && <div>
                     <span>{error.message}</span>
