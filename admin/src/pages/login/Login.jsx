@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'
-import Footer from './Footer';
-import Navbar from './Navbar';
+// import Footer from './Footer';
+// import Navbar from './Navbar';
+import '../login/login.scss'
+import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
     
@@ -12,26 +13,32 @@ const Login = () => {
         password : undefined
     });
     const navigate = useNavigate()
-    const {user, loading, error, dispatch} = useContext(AuthContext);
+    const {user, loading, error, dispatchL} = useContext(AuthContext);
 
     const handleChange = async (e)=>{
         setCredential((prev)=>({...prev, [e.target.id] : e.target.value})); 
     }
     const handleClick = async(e) =>{
         e.preventDefault();
-        dispatch({type :"LOGIN_START"})
+        dispatchL({type :"LOGIN_START"})
         
 
         try {
             const res = await axios.post("/auth/login", credential);
-            dispatch({type:"LOGIN_SUCCESS", payload : res.data.details });
-            navigate("/");
+
+            if(res.data.isAdmin){
+              dispatchL({type:"LOGIN_SUCCESS", payload : res.data.details});
+              navigate("/");
+            }else{
+              dispatchL({type : "LOGIN_FAILURE", payload : {message : "You are not allowed"}});
+            }
         } catch (err) {
-            dispatch({type : "LOGIN_FAILURE", payload : err.response.data});
+            dispatchL({type : "LOGIN_FAILURE", payload : err.response.data});
         }
     }
   return (
-    <><Navbar/>
+    <>
+    {/* <Navbar/> */}
     <div className='login'>
         <div className='lContainer'>
             <h1>Sign in or create an account</h1>
@@ -47,7 +54,7 @@ const Login = () => {
             }
         </div>
     </div>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }
