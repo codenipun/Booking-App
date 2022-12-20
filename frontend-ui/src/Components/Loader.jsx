@@ -2,7 +2,7 @@ import React from 'react'
 import ReactLoading from "react-loading";
 const Loader = () => {
   return (
-    <div>
+    <div className='loader'>
       {/* <h2>Loading in ReactJs - GeeksforGeeks</h2>
       <ReactLoading type="balls" color="#0000FF" 
         height={100} width={50} />
@@ -14,7 +14,7 @@ const Loader = () => {
         height={100} width={50} />
       <ReactLoading type="cylon" color="#0000FF" 
         height={100} width={50} /> */}
-      <ReactLoading className='loader' type="spin" color="#0000FF"
+      <ReactLoading  type="spin" color="#0000FF"
         height={100} width={50} />
       {/* <ReactLoading type="spokes" color="#0000FF"
         height={100} width={50} />

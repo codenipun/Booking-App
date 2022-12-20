@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'
 import Footer from './Footer';
+import Loader from './Loader';
 import Navbar from './Navbar';
 
 const Login = () => {
@@ -32,7 +33,9 @@ const Login = () => {
     }
   return (
     <><Navbar/>
-    <div className='login'>
+    {
+      loading ? <Loader/> :
+       <div className='login'>
         <div className='lContainer'>
             <h1>Sign in or create an account</h1>
             <label className='lLabel'>Username</label>
@@ -47,7 +50,8 @@ const Login = () => {
                 </div>
             }
         </div>
-    </div>
+       </div>
+    }
     <Footer/>
     </>
   )

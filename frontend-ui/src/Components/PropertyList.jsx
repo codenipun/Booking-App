@@ -1,5 +1,6 @@
 import React from 'react'
 import useFetch from '../hooks/useFetch';
+import Loader from './Loader';
 
 const PropertyList = () => {
   const { data, loading, error } = useFetch(
@@ -14,7 +15,7 @@ const PropertyList = () => {
   ];
   return (
     <div className='pList'>
-      {loading ? "loading" : <>
+      {loading ? <Loader/> : <>
         {
           data && 
             images.map((img, i)=>(
