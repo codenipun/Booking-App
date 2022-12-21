@@ -13,7 +13,7 @@ const Datatable = ({columns}) => {
 
   const [list, setList] = useState([]);
 
-  const {data, loading, error} = useFetch(`/${path}`)
+  const {data, loading, error} = useFetch(`https://bookingapp-backend.onrender.com/api/${path}`)
 
   useEffect(() => {
     setList(data);
@@ -22,7 +22,7 @@ const Datatable = ({columns}) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${path}/${id}`)
+      await axios.delete(`https://bookingapp-backend.onrender.com/api/${path}/${id}`)
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };

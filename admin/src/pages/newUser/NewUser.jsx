@@ -32,7 +32,7 @@ const NewUser = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post("https://bookingapp-backend.onrender.com/api/auth/register", newUser);
       navigate("/users");
     } catch (err) {
       console.log(err);

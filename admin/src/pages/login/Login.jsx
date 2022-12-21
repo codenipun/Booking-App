@@ -7,7 +7,6 @@ import '../login/login.scss'
 import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
-    
     const [credential, setCredential] = useState({
         username : undefined,
         password : undefined
@@ -24,7 +23,7 @@ const Login = () => {
         
 
         try {
-            const res = await axios.post("/auth/login", credential);
+            const res = await axios.post("https://bookingapp-backend.onrender.com/api/auth/login", credential);
 
             if(res.data.isAdmin){
               dispatchL({type:"LOGIN_SUCCESS", payload : res.data.details});
