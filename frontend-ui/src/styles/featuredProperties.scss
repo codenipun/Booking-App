@@ -46,3 +46,18 @@
   .fpRating>span{
     font-size: 14px;
   }
+
+  @media (max-width : 450px) {
+      .fp{
+        width: 90%;
+        display: flex;
+        overflow-x: auto;
+      }
+      .fpItem{
+        padding: 5px;
+      }
+      .fpImg{
+        width: 200px;
+        height: 200px;
+      }
+  }
