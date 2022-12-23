@@ -85,3 +85,20 @@
     justify-content: center;
     flex-direction: column;
   }
+
+  @media (max-width:450px) {
+    .listHeader{
+      display: none;
+    }
+    .listWrapper{
+      flex-direction: column;
+      width: 90%;
+    }
+    .listSearch{
+      // height: 80px;
+    }
+
+    .listResult{
+
+    }
+  }
