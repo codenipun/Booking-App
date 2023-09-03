@@ -84,7 +84,7 @@ const Hotel = () => {
   const handleBook = () =>{
     if(user){
       setOpenBookLayout(true);
-    }else{
+    }else{  
       navigate("/login");
     }
   }
