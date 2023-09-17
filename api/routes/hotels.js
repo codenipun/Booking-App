@@ -12,6 +12,14 @@ router.put('/:id',verifyAdmin, updateHotel)
 //DELETE
 router.delete('/:id',verifyAdmin, deleteHotel)
 
+// router.delete('/:id', verifyAdmin, async(req, res)=>{
+//     try {
+//         await Hotel.findbyidandDelete(req.params.id);
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
+
 //GET
 router.get('/find/:id', getHotel)
 
