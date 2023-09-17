@@ -9,7 +9,7 @@ import { message } from 'antd';
 
 const RoomBookLayout = ({setOpen, hotelid}) => {
     const navigate = useNavigate();
-    const {data, error, loading} = useFetch(`https://bookingapp-backend.onrender.com/api/hotels/room/${hotelid}`);
+    const {data} = useFetch(`https://bookingapp-backend.onrender.com/api/hotels/room/${hotelid}`);
     
     const [selectedRooms, setSelectedRooms] = useState([]);
     
@@ -50,18 +50,18 @@ const RoomBookLayout = ({setOpen, hotelid}) => {
 
     const handleClick = async()=>{
         try {
-      await Promise.all(
-        selectedRooms.map((roomId) => {
-          const res = axios.put(`https://bookingapp-backend.onrender.com/api/rooms/availability/${roomId}`, {
-            dates: allDates,
-          });
-          return res.data;
-        })
-      );
-      message.success('Booking Successful');
-      setOpen(false);
-      navigate("/");
-    } catch (err) {}
+          await Promise.all(
+            selectedRooms.map((roomId) => {
+              const res = axios.put(`https://bookingapp-backend.onrender.com/api/rooms/availability/${roomId}`, {
+                dates: allDates,
+              });
+              return res.data;
+            })
+          );
+          message.success('Booking Successful');
+          setOpen(false);
+          navigate("/");
+        } catch (err) {}
     }
     console.log(data)
   return (

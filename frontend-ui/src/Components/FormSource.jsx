@@ -3,24 +3,25 @@ export const userInputs = [
       id: "username",
       label: "Username",
       type: "text",
-      placeholder: "john_doe",
+      placeholder: "mukesh_ambani",
     },
     {
       id: "email",
       label: "Email",
       type: "email",
-      placeholder: "john_doe@gmail.com",
+      placeholder: "ambani07@gmail.com",
     },
     {
       id: "phone",
       label: "Phone",
       type: "text",
-      placeholder: "+91 234 567 89",
+      placeholder: "+91 9876543210",
     },
     {
       id: "password",
       label: "Password",
       type: "password",
+      placeholder: "***************"
     },
     {
       id: "country",

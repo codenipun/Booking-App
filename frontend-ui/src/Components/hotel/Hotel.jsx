@@ -13,7 +13,6 @@ import {
 import useFetch from "../../hooks/useFetch"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
-import { parseWithOptions } from 'date-fns/fp'
 import { AuthContext } from '../../context/AuthContext'
 import RoomBookLayout from '../RoomBookLayout'
 import Loader from '../Loader'
@@ -53,7 +52,7 @@ const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data, loading, error } = useFetch( `https://bookingapp-backend.onrender.com/api/hotels/find/${id}` );
+  const { data, loading } = useFetch( `https://bookingapp-backend.onrender.com/api/hotels/find/${id}` );
   
   const {dates, options} = useContext(SearchContext)
 
