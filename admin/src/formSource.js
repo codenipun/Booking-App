@@ -3,19 +3,19 @@ export const userInputs = [
       id: "username",
       label: "Username",
       type: "text",
-      placeholder: "john_doe",
+      placeholder: "mukesh_ambani",
     },
     {
       id: "email",
       label: "Email",
       type: "email",
-      placeholder: "john_doe@gmail.com",
+      placeholder: "ambani07@gmail.com",
     },
     {
       id: "phone",
       label: "Phone",
       type: "text",
-      placeholder: "+1 234 567 89",
+      placeholder: "+91 9876543210",
     },
     {
       id: "password",
@@ -26,13 +26,13 @@ export const userInputs = [
       id: "country",
       label: "Country",
       type: "text",
-      placeholder: "USA",
+      placeholder: "India",
     },
     {
       id: "city",
       label: "City",
       type: "text",
-      placeholder: "USA",
+      placeholder: "India",
     },
   ];
   
