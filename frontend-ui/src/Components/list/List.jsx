@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import Header from '../Header'
-import Navbar from '../Navbar'
+import Header from '../Header/Header'
+import Navbar from '../Navbar/Navbar'
 import {format} from 'date-fns'
 import {DateRange} from 'react-date-range'
-import SearchItem from '../SearchItem'
+import SearchItem from '../SearchItem/SearchItem'
 import useFetch from "../../hooks/useFetch"
-import Loader from '../Loader'
+import Loader from '../Loader/Loader'
+
+import "./list.scss"
 
 const List = () => {
   const location = useLocation();
+  let [openFilter, setOpenFilter] = useState(false);
   const [destination, setDestination] = useState(location.state.destination);
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState(location.state.dates);
@@ -18,6 +21,7 @@ const List = () => {
   const [minP, setMinP] = useState(undefined);
   const [maxP, setMaxP] = useState(undefined);
   
+  
 
   //custom hook to fetch data from backend
   const { data, loading, error, reFetch } = useFetch(
@@ -25,10 +29,39 @@ const List = () => {
   );
 
   const handleClick = () =>{
+    setOpenFilter(!openFilter)
     reFetch();
   }
 
+  const [windowDimension, setWindowDimension] = useState(null);
+
+  useEffect(() => {
+    setWindowDimension(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimension(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowDimension <= 750;
+
+  if(!isMobile){
+      openFilter = true;
+  }
+
+  const handleFilterClick = () =>{
+    if(isMobile){
+      setOpenFilter(!openFilter);
+    }
+  }
+  
   return (
+    
     <div>
       <Navbar/>
       <div className='listHeader'>
@@ -36,20 +69,24 @@ const List = () => {
       </div>
       <div className='listContainer'>
         <div className='listWrapper'>
-          <div className='listSearch'>
-            <h1 className='lsTitle'>Search</h1>
-            <div className='lsItem'>
-              <label>Destination</label>
-              <input type="text" placeholder={destination} onChange={e=>setDestination(e.target.value)}/>
-            </div>
-            <div className='lsItem'>
-              <label>Check-in Date</label>
-              <span onClick={()=>{setOpenDate(!openDate)}}>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`} </span>
+          {
+            !openFilter ? (<div onClick={handleFilterClick} className='mobileFilterView'>
+              Search Filters
+            </div>) : (
+              <div className='listSearch'>
+                <h1 className='lsTitle'>Search</h1>
+                <div className='lsItem'>
+                  <label>Destination</label>
+                  <input className='destination_input' type="text" placeholder={destination} onChange={e=>setDestination(e.target.value)}/>
+                </div>
+                <div className='lsItem'>
+                  <label>Check-in Date</label>
+                  <span onClick={()=>{setOpenDate(!openDate)}}>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`} </span>
 
-              {openDate && <DateRange
-                onChange={(item)=>setDates([item.selection])}
-                minDate = {new Date()}
-                ranges={dates}
+                  {openDate && <DateRange
+                    onChange={(item)=>setDates([item.selection])}
+                    minDate = {new Date()}
+                    ranges={dates}
               />
               }
             </div>
@@ -80,6 +117,8 @@ const List = () => {
             </div>
             <button onClick={handleClick}>Search</button>
           </div>
+            )
+          }
           <div className='listResult'>
               {loading ? <Loader/> : 
                 <>

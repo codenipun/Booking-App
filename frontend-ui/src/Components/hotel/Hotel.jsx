@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import Footer from '../Footer'
-import Header from '../Header'
-import MailList from '../MailList'
-import Navbar from '../Navbar'
+import Footer from '../Footer/Footer'
+import Header from '../Header/Header'
+import MailList from '../MailList/MailList'
+import Navbar from '../Navbar/Navbar'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faCircleArrowLeft,
@@ -13,9 +13,12 @@ import {
 import useFetch from "../../hooks/useFetch"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import { parseWithOptions } from 'date-fns/fp'
 import { AuthContext } from '../../context/AuthContext'
-import RoomBookLayout from '../RoomBookLayout'
-import Loader from '../Loader'
+import RoomBookLayout from '../RoomBookLayout/RoomBookLayout'
+import Loader from '../Loader/Loader'
+import "./hotel.scss"
+// import "../Hotel/hotel.scss"
 
 
 const Hotel = () => {
@@ -52,7 +55,7 @@ const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data, loading } = useFetch( `https://bookingapp-backend.onrender.com/api/hotels/find/${id}` );
+  const { data, loading, error } = useFetch( `https://bookingapp-backend.onrender.com/api/hotels/find/${id}` );
   
   const {dates, options} = useContext(SearchContext)
 
@@ -83,7 +86,7 @@ const Hotel = () => {
   const handleBook = () =>{
     if(user){
       setOpenBookLayout(true);
-    }else{  
+    }else{
       navigate("/login");
     }
   }

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import "./userRegister.scss"
 
 const UserRegister = ({ inputs, title }) => {
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ const UserRegister = ({ inputs, title }) => {
       console.log(err);
     }
   };
+
+  const handleLoginClick = () =>{
+    navigate("/login")
+  }
 
   // console.log(info);
   return (
@@ -51,8 +56,8 @@ const UserRegister = ({ inputs, title }) => {
                     />
                   </div>
                 ))}
-                <button className="rButton" onClick={handleClick}>Send</button>
-                <span className='register'>Already a User? &nbsp; <a href='/login'> Login</a></span>
+                <button className="rButton" onClick={handleClick}>Submit</button>
+                <span onClick={handleLoginClick} className='register'>Already a User? &nbsp; <span className="loginBtn">Sign-in</span></span>
               </form>
             </div>
           </div>

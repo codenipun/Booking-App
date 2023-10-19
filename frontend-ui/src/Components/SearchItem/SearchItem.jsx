@@ -1,12 +1,15 @@
 import React from 'react'
-import '../styles/searchItem.scss'
+import './searchItem.scss'
 import {Link} from "react-router-dom"
+import "./searchItem.scss"
+import sampleImage from "../../Images/sample_image.webp"
+import axios from 'axios'
+
 
 const SearchItem = ({item}) => {
   return (
     <div className='searchItem'>
-        <img src={item.images[0]}
-        alt="" className='siImg'/>
+        <img src={item.images[0]} alt='' className='siImg'/>
         <div className='secondContainer'>
           <div className='siDesc'>
               <h1 className="siTitle">{item.name}</h1>
@@ -26,7 +29,7 @@ const SearchItem = ({item}) => {
 
           <div className='siDetails'>
               {item.rating && <div className="siRating">
-                <span>{item.rating===1 ? "Cheap" : item.rating===2 ? "Good" : item.rating===3 ? "Nice" : item.rating===4 ? "Superb" : "Excellent"}</span>
+              <span>{item.rating===1 ? "Cheap" : item.rating===2 ? "Good" : item.rating===3 ? "Nice" : item.rating===4 ? "Superb" : "Excellent"}</span>
                 <button>{item.rating}⭐</button>
               </div>}
               <div className="siDetailTexts">
