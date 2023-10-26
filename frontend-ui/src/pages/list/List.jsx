@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import Header from '../Header/Header'
-import Navbar from '../Navbar/Navbar'
+import Header from '../../Components/Header/Header'
+import Navbar from '../../Components/Navbar/Navbar'
 import {format} from 'date-fns'
 import {DateRange} from 'react-date-range'
-import SearchItem from '../SearchItem/SearchItem'
+import SearchItem from '../../Components/SearchItem/SearchItem'
 import useFetch from "../../hooks/useFetch"
-import Loader from '../Loader/Loader'
+import Loader from '../../Components/Loader/Loader'
 
 import "./list.scss"
 
@@ -16,21 +16,27 @@ const List = () => {
   const [destination, setDestination] = useState(location.state.destination);
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState(location.state.dates);
-  const [options, setOptions] = useState(location.state.options);
+  const options =location.state.options;
 
   const [minP, setMinP] = useState(undefined);
   const [maxP, setMaxP] = useState(undefined);
+
+  // console.log(location.state.type)
   
   
 
   //custom hook to fetch data from backend
-  const { data, loading, error, reFetch } = useFetch(
-    `https://bookingapp-backend.onrender.com/api/hotels?city=${destination}&min=${minP || 0}&max=${maxP || 19999}` 
+  const { data, loading, reFetch } = useFetch(
+    `${process.env.REACT_APP_BACKEND_SERVER}/hotels?city=${destination}&min=${minP || 0}&max=${maxP || 19999}` 
+  );
+  const { data : typeData, loading : typeLoading, reFetch : typeReFetch } = useFetch(
+    `${process.env.REACT_APP_BACKEND_SERVER}/hotels/getByType?type=${location.state.type}&min=${minP || 0}&max=${maxP || 19999}` 
   );
 
   const handleClick = () =>{
     setOpenFilter(!openFilter)
     reFetch();
+    typeReFetch();
   }
 
   const [windowDimension, setWindowDimension] = useState(null);
@@ -122,11 +128,20 @@ const List = () => {
           <div className='listResult'>
               {loading ? <Loader/> : 
                 <>
-                  {
-                    data.map((item)=>(
-                      <SearchItem key={item._id} item = {item} />
-                    ))
-                  }
+                {data.length!==0 ? 
+                  data.map((item)=>(
+                        <SearchItem key={item._id} item = {item} />
+                      ))
+                : typeData.length!==0 ? 
+                 <><div style={{width: "100%", marginBottom: "10px", fontSize: "25px", fontWeight: "500" }}> All {location.state.type}s</div>
+                  {typeData.map((item)=>(
+                    <SearchItem key={item._id} item={item}/>
+                  ))}
+                  </>
+                :
+                
+                  <h3 style={{color : "red"}}>Sorry, No Hotels for Now at this Price Range !!</h3>
+                }
                 </>
               }
           </div>

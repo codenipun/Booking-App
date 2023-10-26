@@ -46,6 +46,11 @@
     font-weight:100;
 }
 
+.type-animation{
+    color: #febb02;
+    font-weight: 500;
+}
+
 .headerBtn{
     background-color: #0071c2;
     color: white;
@@ -148,6 +153,9 @@
 .headerTitle{
     font-size: 50px;
 }
+.headerBtn:hover{
+    box-shadow: 1px 1px 5px #fff;
+}
 
 @media (max-width: 450px) {
     .headerSearchBar{
@@ -156,12 +164,15 @@
         height: 150px;
         flex-direction: column;
         bottom: 9px;
+    // bottom: 50px;
     }
     .headerSearchItem{
         border: 1.5px solid #febb02;
         border-bottom: 1.5px solid #febb02;
         width: 100%;
+        max-width: 350px;
         justify-content: center;
+        text-align: center;
         height: 40px;
     } 
     .headerBtn{
@@ -184,6 +195,16 @@
     }
     .headerList{
         display: none;
+    }
+    .date{
+        margin-top: 110px;
+    }
+    .options{
+        margin-top: 110px;
+    }
+    .headerSearchInput{
+        width: 130px;
+        // text-align: center;
     }
 }
 // @media (max-width: 751px) {

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import Footer from '../Footer/Footer'
-import Header from '../Header/Header'
-import MailList from '../MailList/MailList'
-import Navbar from '../Navbar/Navbar'
+import Footer from '../../Components/Footer/Footer'
+import Header from '../../Components/Header/Header'
+import MailList from '../../Components/MailList/MailList'
+import Navbar from '../../Components/Navbar/Navbar'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {
   faCircleArrowLeft,
@@ -13,10 +13,9 @@ import {
 import useFetch from "../../hooks/useFetch"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
-import { parseWithOptions } from 'date-fns/fp'
 import { AuthContext } from '../../context/AuthContext'
-import RoomBookLayout from '../RoomBookLayout/RoomBookLayout'
-import Loader from '../Loader/Loader'
+import RoomBookLayout from '../../Components/RoomBookLayout/RoomBookLayout'
+import Loader from '../../Components/Loader/Loader'
 import "./hotel.scss"
 // import "../Hotel/hotel.scss"
 
@@ -55,7 +54,7 @@ const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data, loading, error } = useFetch( `https://bookingapp-backend.onrender.com/api/hotels/find/${id}` );
+  const { data, loading } = useFetch( `${process.env.REACT_APP_BACKEND_SERVER}/hotels/find/${id}` );
   
   const {dates, options} = useContext(SearchContext)
 
@@ -96,7 +95,7 @@ const Hotel = () => {
       <div className='hotelHeader'>
         <Header type={'list'}/>
       </div>
-        {loading? <Loader/> : 
+        {loading? <div style={{height:'90vh', display:'flex', justifyContent:'center', alignItems:'center'}}><Loader/> </div> : 
         <div className='hotelContainer'>
           {
             open && <div className="slider">

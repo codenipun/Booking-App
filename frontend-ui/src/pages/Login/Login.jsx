@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'
-import Footer from '../Footer/Footer';
-import Loader from '../Loader/Loader';
-import Navbar from '../Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
+import Loader from '../../Components/Loader/Loader';
+import Navbar from '../../Components/Navbar/Navbar';
 import loginImg from '../../Images/login-illustration.png'
 import "./login.scss"
 
@@ -15,7 +15,7 @@ const Login = () => {
         password : undefined
     });
     const navigate = useNavigate()
-    const {user, loading, error, dispatch} = useContext(AuthContext);
+    const {loading, error, dispatch} = useContext(AuthContext);
 
     const handleChange = async (e)=>{
         setCredential((prev)=>({...prev, [e.target.id] : e.target.value})); 
@@ -26,7 +26,7 @@ const Login = () => {
         
 
         try {
-            const res = await axios.post("https://bookingapp-backend.onrender.com/api/auth/login", credential);
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_SERVER}/auth/login`, credential);
             dispatch({type:"LOGIN_SUCCESS", payload : res.data.details });
             navigate("/");
         } catch (err) {
